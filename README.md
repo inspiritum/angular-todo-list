@@ -1,59 +1,67 @@
-# FrontendAngularProjectFirstStep
+# ДЗ 13/14 — Расширение Todo: компоненты, фильтры, редактирование
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+## Цель:
+закрепить основы Angular:
+- ngIf/ngFor/ngSwitch, переменные и шаблоны
+- вёрстка и управление стилями
+- Input/Output в декомпозиции на компоненты
 
-## Development server
+## Срок:
+до следующего семинара - до 16.02.26 в 23:00 мск
 
-To start a local development server, run:
+### Основная часть — 8 баллов
 
-```bash
-ng serve
-```
+#### A.1) Декомпозиция на компоненты + Input/Output (2 балла)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**1 балл — TodoItem отдельным компонентом**
+- получает данные задачи через Input
+- отдаёт события наружу через Output
 
-## Code scaffolding
+**1 балл — Чёткое однонаправленное управление**
+- состояние списка хранится в родителе (страница/контейнер)
+- дочерние компоненты не мутируют общий массив напрямую, только эмитят события
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+#### A.2) Редактирование текста задачи (2 балла)
 
-```bash
-ng generate component component-name
-```
+**1 балл — Включение режима редактирования**
+- переход в edit-mode (кнопка/двойной клик — на выбор)
+- управление отображением через ngIf (или аналогичный подход)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**1 балл — Сохранение/отмена**
+- сохранение нового текста
+- отмена редактирования без изменения текста
+- базовая валидация (нельзя сохранить пустую строку)
 
-```bash
-ng generate --help
-```
+#### A.3) Действия и состояния задач (2 балла)
 
-## Building
+**1 балл — Реализовать действия для задачи**
+- отметить выполненной по чекбоксу
+- отменить выполнение (снять чекбокс)
+- выполненная - подчеркнуть, покрасить в зеленый цвет
+- не выполенная - обычный черный текст
 
-To build the project run:
+**1 балл - Удаление и восстановление**
+- удалить задачу (перевести в состояние “удалена”, без физического удаления из массива, покрасить в красный и зачеркнуть)
+- восстановить задачу обратно в обычные (снова покрасить в черный цвет и удалить зачеркивание)
 
-```bash
-ng build
-```
+#### A.4) Фильтры + переключатель + панель статистики (2 балла)
+Без archived в основной части. Здесь только "обычные", "выполненые" и "удалённые"
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**1 балл — Переключатель фильтра (вкладки/кнопки)**
+- All / Done / Deleted
+- визуальная подсветка активного фильтра через классы/стили
 
-## Running unit tests
+**1 балл — Панель статистики**
+- счётчики all / active / deleted
+- аккуратная верстка, читабельные стили
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Дополнительная часть — 2 балла (бонус)
 
-```bash
-ng test
-```
+#### B1) Сообщения в зависимости от количества задач (1 балл)
+- выводить сообщение (и стиль/цвет) в зависимости от количества задач (например, active/done/deleted)
+- при накоплении 10 задач для каждой категории выводить сообщение "Внимание! Вы накопили 10 задач в категории <НАЗВАНИЕ КАТЕГОРИИ>"
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+#### B2) Архивация и восстановление (1 балл)
+- добавить состояние archived и отдельный фильтр/вкладку для архива
+- возможность отправить задачу в архив и восстановить обратно
+- задача в архиве - ее текст синий курсивом
