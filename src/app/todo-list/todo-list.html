@@ -1,0 +1,14 @@
+<app-todo-search-form
+    class="search-form"
+    (submitEvent)="addNewTodo($event)"
+></app-todo-search-form>
+
+@if (todoList.length) {
+    <app-todo-data-list
+        class="data-list"
+        [dataList]="todoList"
+        (removeEvent)="removeTodo($event)"
+    ></app-todo-data-list>
+} @else {
+    <div class="error-block">Cписок пуст</div>
+}
